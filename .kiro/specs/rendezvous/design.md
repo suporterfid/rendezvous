@@ -1,5 +1,9 @@
 # Technical Design — Rendezvous MVP
 
+> *This project is part of the [IROH Initiative](https://github.com/suporterfid/iroh). See the main hub for manifesto, branding, and ecosystem index.*
+
+---
+
 ## 1. System Architecture Diagram
 
 ```mermaid

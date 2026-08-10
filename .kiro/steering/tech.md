@@ -1,5 +1,9 @@
 # Technical Steering — Rendezvous
 
+> *This project is part of the [IROH Initiative](https://github.com/suporterfid/iroh). See the main hub for manifesto, branding, and ecosystem index.*
+
+---
+
 ## Tech Stack
 - **Backend Framework:** Laravel 12 (PHP 8.2+)
 - **Frontend Framework:** Vue 3 (Composition API, `<script setup>`), TypeScript, Vite, Pinia, Vue I18n (`en` and `pt-BR`), Tailwind CSS.

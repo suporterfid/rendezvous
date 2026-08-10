@@ -1,5 +1,9 @@
 # Product Steering — Rendezvous
 
+> *This project is part of the [IROH Initiative](https://github.com/suporterfid/iroh). See the main hub for manifesto, branding, and ecosystem index.*
+
+---
+
 ## Overview
 Rendezvous is an open-source, multi-tenant calendar mash-up platform. It aggregates events from multiple calendar sources — subscribed ICS feeds, read-only CalDAV subscriptions, and email-delivered meeting invites — into a single browsable calendar per tenant, and republishes the merged result as a subscribable ICS feed (`webcal://`).
 

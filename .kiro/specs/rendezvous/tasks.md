@@ -1,5 +1,9 @@
 # Implementation Tasks — Rendezvous MVP
 
+> *This project is part of the [IROH Initiative](https://github.com/suporterfid/iroh). See the main hub for manifesto, branding, and ecosystem index.*
+
+---
+
 ## Phase 0: Foundation & Docker Stack
 
 - [x] **Task 0.1: Docker Compose & Infrastructure Setup**

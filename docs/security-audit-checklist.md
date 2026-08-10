@@ -1,4 +1,8 @@
-# Security Audit & Penetration Testing Checklist — Rendezvous
+# Security Audit & Penetration Testing Checklist — Rendezvous 📅
+
+> *This project is part of the [IROH Initiative](https://github.com/suporterfid/iroh). See the main hub for manifesto, branding, and ecosystem index.*
+
+---
 
 This document details the security controls, automated test coverage, and penetration checklist for the **Rendezvous** platform.
 

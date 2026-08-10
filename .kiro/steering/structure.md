@@ -1,5 +1,9 @@
 # Structure & Conventions Steering — Rendezvous
 
+> *This project is part of the [IROH Initiative](https://github.com/suporterfid/iroh). See the main hub for manifesto, branding, and ecosystem index.*
+
+---
+
 ## Repository Layout
 ```text
 rendezvous/

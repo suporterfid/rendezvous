@@ -1,5 +1,9 @@
 # Rendezvous — Product and Technical Specification
 
+> *This project is part of the [IROH Initiative](https://github.com/suporterfid/iroh). See the main hub for manifesto, branding, and ecosystem index.*
+
+---
+
 ## Document Metadata
 
 - **Version:** 1.1

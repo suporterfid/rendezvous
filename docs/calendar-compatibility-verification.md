@@ -1,4 +1,8 @@
-# Outlook 365 & Google Workspace Live Feed Conformance Protocol
+# Outlook 365 & Google Workspace Live Feed Conformance Protocol — Rendezvous 📅
+
+> *This project is part of the [IROH Initiative](https://github.com/suporterfid/iroh). See the main hub for manifesto, branding, and ecosystem index.*
+
+---
 
 This document defines the release-gated verification protocol required before every production release of Rendezvous, enforcing strict conformance with Outlook 365 and Google Calendar feed import behavior.
 
@@ -9,8 +13,11 @@ This document defines the release-gated verification protocol required before ev
 Before initiating manual testing, run the automated test suite inside the Docker container:
 
 ```bash
+# Windows PowerShell
 .\scripts\rv.ps1 test
-# Or in Linux/macOS: ./scripts/rv.sh test
+
+# Linux / macOS
+./scripts/rv.sh test
 ```
 
 Expected output:
