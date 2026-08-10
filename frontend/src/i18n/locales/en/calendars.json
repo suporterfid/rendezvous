@@ -1,0 +1,25 @@
+{
+  "title": "Rendezvous Calendar",
+  "views": {
+    "month": "Month",
+    "week": "Week",
+    "day": "Day",
+    "agenda": "Agenda"
+  },
+  "sources": {
+    "email_invite": "Email Invite",
+    "ics_feed_subscription": "ICS Feed",
+    "caldav_subscription": "CalDAV",
+    "manual": "Manual"
+  },
+  "status": {
+    "confirmed": "Confirmed",
+    "cancelled": "Cancelled",
+    "tentative": "Tentative"
+  },
+  "mailbox": {
+    "ingest_title": "IMAP Ingestion Mailbox",
+    "polling": "Polling active...",
+    "quarantined": "Quarantined Invites"
+  }
+}

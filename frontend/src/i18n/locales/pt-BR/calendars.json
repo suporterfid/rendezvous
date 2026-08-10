@@ -1,0 +1,25 @@
+{
+  "title": "Calendário Rendezvous",
+  "views": {
+    "month": "Mês",
+    "week": "Semana",
+    "day": "Dia",
+    "agenda": "Agenda"
+  },
+  "sources": {
+    "email_invite": "Convite por E-mail",
+    "ics_feed_subscription": "Feed ICS",
+    "caldav_subscription": "CalDAV",
+    "manual": "Manual"
+  },
+  "status": {
+    "confirmed": "Confirmado",
+    "cancelled": "Cancelado",
+    "tentative": "Tentativo"
+  },
+  "mailbox": {
+    "ingest_title": "Caixa de Entrada IMAP",
+    "polling": "Monitoramento ativo...",
+    "quarantined": "Convites Quarentenados"
+  }
+}

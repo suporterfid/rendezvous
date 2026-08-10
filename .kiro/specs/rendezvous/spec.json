@@ -1,0 +1,10 @@
+{
+  "name": "rendezvous",
+  "version": "1.1",
+  "language": "en",
+  "title": "Rendezvous — Open Source Multi-Tenant Calendar Mash-up Platform",
+  "description": "Aggregates events from multiple sources (subscribed ICS feeds, read-only CalDAV, and email meeting invites via IMAP) into a single unified calendar per tenant and republishes as a subscribable webcal:// feed.",
+  "status": "completed",
+  "current_phase": "Phase 5: Release Packaging & Verification (Completed)",
+  "completed_at": "2026-08-10T09:54:00Z"
+}
