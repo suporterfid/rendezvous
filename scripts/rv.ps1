@@ -1,24 +1,42 @@
-# Rendezvous CLI Utility Script (rv.ps1) for Windows PowerShell
+# Rendezvous CLI Utility Script (scripts/rv.ps1) for Windows PowerShell
 
 param (
-    [Parameter(Mandatory=$true, Position=0)]
-    [string]$Command,
-    [ValueFromRemainingArguments($true)]
+    [Parameter(Position=0)]
+    [string]$Command = "help",
+    [Parameter(ValueFromRemainingArguments=$true)]
     [string[]]$Args
 )
 
+# Detect Docker Compose binary (v2 'docker compose' vs v1 'docker-compose')
 $COMPOSE = "docker compose"
+try {
+    $null = & docker compose version 2>$null
+} catch {
+    $COMPOSE = "docker-compose"
+}
 
-switch ($Command) {
+switch ($Command.ToLower()) {
     "up" {
-        Write-Host "🚀 Starting Rendezvous Docker containers..." -ForegroundColor Green
+        Write-Host "Starting Rendezvous Docker containers..." -ForegroundColor Green
         Invoke-Expression "$COMPOSE up -d --build"
-        Write-Host "✅ Rendezvous environment running at http://localhost:8080" -ForegroundColor Cyan
-        Write-Host "📧 Mailpit UI running at http://localhost:8025" -ForegroundColor Cyan
+        Write-Host "Rendezvous web running at: http://localhost:8080" -ForegroundColor Cyan
+        Write-Host "Mailpit UI running at:     http://localhost:8025" -ForegroundColor Cyan
     }
     "down" {
-        Write-Host "🛑 Stopping Rendezvous Docker containers..." -ForegroundColor Yellow
+        Write-Host "Stopping Rendezvous Docker containers..." -ForegroundColor Yellow
         Invoke-Expression "$COMPOSE down"
+    }
+    "build" {
+        Write-Host "Building frontend assets and optimizing backend..." -ForegroundColor Green
+        Invoke-Expression "$COMPOSE exec node npm run build"
+        Invoke-Expression "$COMPOSE exec app php artisan config:cache"
+        Invoke-Expression "$COMPOSE exec app php artisan route:cache"
+        Write-Host "Containerized build completed successfully!" -ForegroundColor Cyan
+    }
+    "test" {
+        Write-Host "Running complete PHPUnit & Pest test suite..." -ForegroundColor Green
+        $extraArgs = $Args -join " "
+        Invoke-Expression "$COMPOSE exec app php artisan test $extraArgs"
     }
     "artisan" {
         $extraArgs = $Args -join " "
@@ -32,22 +50,45 @@ switch ($Command) {
         $extraArgs = $Args -join " "
         Invoke-Expression "$COMPOSE exec node npm $extraArgs"
     }
-    "test" {
-        Write-Host "🧪 Running backend & domain unit tests..." -ForegroundColor Green
-        Invoke-Expression "$COMPOSE exec app php artisan test"
-    }
     "logs" {
-        Invoke-Expression "$COMPOSE logs -f"
+        $extraArgs = $Args -join " "
+        Invoke-Expression "$COMPOSE logs -f $extraArgs"
     }
     "release" {
-        Write-Host "📦 Packaging release for Hostinger Shared Hosting..." -ForegroundColor Green
+        Write-Host "Packaging release bundle for Hostinger Shared Hosting..." -ForegroundColor Green
         New-Item -ItemType Directory -Force -Path "dist_release" | Out-Null
+        
+        # Build frontend assets inside container
         Invoke-Expression "$COMPOSE exec node npm run build"
-        Compress-Archive -Path "public\*","app\*","routes\*","config\*" -DestinationPath "dist_release\rendezvous-release.zip" -Force
-        Get-FileHash "dist_release\rendezvous-release.zip" -Algorithm SHA256 | Export-Clixml "dist_release\SHA256SUMS.xml"
-        Write-Host "✅ Release zip generated at dist_release\rendezvous-release.zip" -ForegroundColor Cyan
+        
+        # Create staging directory
+        $stageDir = "dist_release\staging"
+        if (Test-Path $stageDir) { Remove-Item -Recurse -Force $stageDir }
+        New-Item -ItemType Directory -Force -Path $stageDir | Out-Null
+        
+        # Copy backend, public static assets and config
+        Copy-Item -Recurse -Force "app", "bootstrap", "config", "database", "public", "routes", "vendor", "composer.json" -Destination $stageDir
+        if (Test-Path ".htaccess") { Copy-Item -Force ".htaccess" -Destination $stageDir }
+        
+        # Compress into zip package
+        $zipFile = "dist_release\rendezvous-release.zip"
+        if (Test-Path $zipFile) { Remove-Item -Force $zipFile }
+        Compress-Archive -Path "$stageDir\*" -DestinationPath $zipFile -Force
+        
+        # Generate SHA256 Checksum
+        $hash = (Get-FileHash $zipFile -Algorithm SHA256).Hash
+        "$hash  rendezvous-release.zip" | Out-File -Encoding ascii "dist_release\SHA256SUMS"
+        
+        Remove-Item -Recurse -Force $stageDir
+        Write-Host "Release bundle created: dist_release\rendezvous-release.zip" -ForegroundColor Cyan
+        Write-Host "SHA256 Checksum: $hash" -ForegroundColor Yellow
+    }
+    "deploy" {
+        # Deploy alias pointing to release packaging for Hostinger Shared Hosting
+        & $PSCommandPath "release"
     }
     Default {
-        Write-Host "Usage: .\scripts\rv.ps1 {up|down|artisan|composer|npm|test|logs|release}" -ForegroundColor Red
+        Write-Host "Rendezvous CLI Manager" -ForegroundColor Green
+        Write-Host "Usage: .\rv.ps1 {up|down|build|test|artisan|composer|npm|logs|release|deploy}" -ForegroundColor Yellow
     }
 }
