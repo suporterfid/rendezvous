@@ -151,7 +151,7 @@ php artisan calendar:refresh-feeds
 O Rendezvous integra-se perfeitamente com o **GrandpaSSOn** como seu Provedor de Identidade e Single Sign-On central:
 - **Protocolos de Autenticação:** OpenID Connect (OIDC), OAuth2 Authorization Code Flow com PKCE e tokens JWT assinados.
 - **Contexto Multi-Tenant:** Herda automaticamente a participação em tenants e declarações de autorização a partir dos tokens do GrandpaSSOn.
-- **Hub Central de SSO:** Saiba mais ou implante serviços de identidade em [suporterfid/grandpasson](https://github.com/suporterfid/grandpasson).
+- **Hub Central de SSO:** Saiba mais ou implante serviços de identidade em [suporterfid/grandpasson-ce](https://github.com/suporterfid/grandpasson-ce).
 
 ---
 
@@ -159,7 +159,7 @@ O Rendezvous integra-se perfeitamente com o **GrandpaSSOn** como seu Provedor de
 
 O Rendezvous colabora com outras ferramentas no ecossistema da Iniciativa IROH através de conexões desacopladas e opcionais:
 
-* 🔐 **[grandpasson](https://github.com/suporterfid/grandpasson)** — Provedor de Identidade Single Sign-On (SSO) central para autenticação multi-tenant perfeita.
+* 🔐 **[grandpasson](https://github.com/suporterfid/grandpasson-ce)** — Provedor de Identidade Single Sign-On (SSO) central para autenticação multi-tenant perfeita.
 * 📝 **[jotter](https://github.com/suporterfid/jotter)** — Base de conhecimento em Markdown auto-hospedada; conecta notas de reunião a eventos de calendário via MCP JSON-RPC somente leitura.
 * 📄 **[ConvertDocToMd-PHP](https://github.com/suporterfid/ConvertDocToMd-PHP)** — Conversor leve em PHP de DOC/DOCX/PDF para Markdown para pré-processamento de anexos.
 * ⚡ **[taskconnect](https://github.com/suporterfid/taskconnect)** — Agendador de tarefas HTTP multi-tenant para disparos auxiliares via cron e webhooks HMAC.
