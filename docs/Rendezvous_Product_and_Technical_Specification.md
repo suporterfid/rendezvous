@@ -13,7 +13,7 @@
 - **Reference deployment profile:** Hostinger-like shared hosting without a VPS, Redis, long-running workers, or process supervisors
 - **Development environment:** Docker-only, no host PHP/Composer/Node/MySQL installation
 - **Initial interface languages:** English (`en`) and Brazilian Portuguese (`pt-BR`)
-- **Sibling projects:** [`suporterfid/jotter`](https://github.com/suporterfid/jotter), [`suporterfid/grandpasson`](https://github.com/suporterfid/grandpasson), [`suporterfid/taskconnect`](https://github.com/suporterfid/taskconnect)
+- **Sibling projects:** [`suporterfid/jotter`](https://github.com/suporterfid/jotter), [`suporterfid/grandpasson-ce`](https://github.com/suporterfid/grandpasson-ce), [`suporterfid/taskconnect`](https://github.com/suporterfid/taskconnect)
 
 ***
 
@@ -28,7 +28,7 @@ No published open-source project in PHP + MySQL/SQLite combines calendar mash-up
 Rendezvous is designed as a sibling to three existing OSS projects by the same author, and MUST follow their established architectural conventions to minimize operational cost and maximize component reuse (authentication, cron scheduling, design system):
 
 - [`suporterfid/jotter`](https://github.com/suporterfid/jotter) — self-hosted Markdown knowledge base, Laravel 12 + Vue 3 SPA, MySQL as rebuildable index over Markdown files, multi-workspace data model, `IdentityProvider` auth seam, MCP server.
-- [`suporterfid/grandpasson`](https://github.com/suporterfid/grandpasson) — minimalist PHP + MySQL SSO broker for shared hosting, federates Google/Microsoft/GitHub identity, tenancy claims, service-client machine tokens, PATs, JWKS.
+- [`suporterfid/grandpasson-ce`](https://github.com/suporterfid/grandpasson-ce) — minimalist PHP + MySQL SSO broker for shared hosting, federates Google/Microsoft/GitHub identity, tenancy claims, service-client machine tokens, PATs, JWKS.
 - [`suporterfid/taskconnect`](https://github.com/suporterfid/taskconnect) — open-source multi-tenant HTTP task scheduler for PHP/MySQL shared hosting, Laravel 12 + Vue 3, cron-driven at-least-once delivery with retries and SSRF protection.
 
 ***
@@ -255,7 +255,7 @@ No new design system is required: portfolio integration is achieved by adopting 
 
 | Sibling repository | Role in Rendezvous | Coupling |
 |---|---|---|
-| [`grandpasson`](https://github.com/suporterfid/grandpasson) | Identity provider/SSO via `POST /session/exchange` (authorization code flow) or service-client machine tokens (`client_credentials`) for automation; tenant/role claims from the exchange response are reused as Rendezvous's tenant context | Optional seam, not a runtime dependency — same rule Jotter applies |
+| [`grandpasson`](https://github.com/suporterfid/grandpasson-ce) | Identity provider/SSO via `POST /session/exchange` (authorization code flow) or service-client machine tokens (`client_credentials`) for automation; tenant/role claims from the exchange response are reused as Rendezvous's tenant context | Optional seam, not a runtime dependency — same rule Jotter applies |
 | [`taskconnect`](https://github.com/suporterfid/taskconnect) | Executor for auxiliary scheduled jobs (e.g., event-reminder dispatch, push-preferring third-party feed sync) via HTTP tasks targeting Rendezvous-internal endpoints | Optional — Rendezvous MUST retain its own internal cron as the guaranteed path; TaskConnect is a reinforcement, never a prerequisite |
 | [`jotter`](https://github.com/suporterfid/jotter) | Optional cross-context source: notes linked to an event (`[[wikilink]]` from a meeting to its prep note), consumed via Jotter's read-only MCP server (`list_notes`, `read_note`, `search_notes`, `get_backlinks`) | Optional — added-value integration, never blocking |
 
@@ -871,8 +871,8 @@ When an agent needs authoritative behavior for an integration point, it MUST con
 
 | Need | Authoritative source |
 |---|---|
-| SSO exchange payload shape, tenant/locale claims, PKCE flow | [`grandpasson`](https://github.com/suporterfid/grandpasson) → `docs/client-integration.md` |
-| Service-client / machine-token creation and scopes | [`grandpasson`](https://github.com/suporterfid/grandpasson) → `docs/client-integration.md`, §5 |
+| SSO exchange payload shape, tenant/locale claims, PKCE flow | [`grandpasson`](https://github.com/suporterfid/grandpasson-ce) → `docs/client-integration.md` |
+| Service-client / machine-token creation and scopes | [`grandpasson`](https://github.com/suporterfid/grandpasson-ce) → `docs/client-integration.md`, §5 |
 | Cron executor claiming, retry policy, SSRF validation pattern | [`taskconnect`](https://github.com/suporterfid/taskconnect) → `docs/http-task-scheduler-spec.md` |
 | REST API conventions, error envelope, idempotency headers | [`taskconnect`](https://github.com/suporterfid/taskconnect) → `docs/http-task-scheduler-spec.md`, §17 |
 | Docker-only dev loop, release/zip packaging | [`jotter`](https://github.com/suporterfid/jotter) and [`taskconnect`](https://github.com/suporterfid/taskconnect) → root `README.md`, `scripts/` |

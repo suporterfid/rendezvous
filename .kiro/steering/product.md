@@ -13,7 +13,7 @@ Turns a dedicated corporate inbox or folder into a first-class calendar source b
 ## Sibling Portfolio Alignment
 Rendezvous is designed as a sibling to three existing open-source projects by the same author:
 - `suporterfid/jotter` (Markdown KB, Laravel + Vue 3, shared visual identity, MCP)
-- `suporterfid/grandpasson` (SSO broker for shared hosting, OAuth token exchange)
+- `suporterfid/grandpasson-ce` (SSO broker for shared hosting, OAuth token exchange)
 - `suporterfid/taskconnect` (Multi-tenant HTTP task scheduler, cron execution, SSRF protection)
 
 Neighbor integrations (GrandpaSSOn SSO, TaskConnect scheduling, Jotter notes) are **optional seams, never hard runtime dependencies**.
